@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Article = require('./models/article')
 const articleRouter = require('./routes/articles.js')
 const dotenv = require("dotenv")
 const bodyParser = require('body-parser');
@@ -26,19 +27,9 @@ mongoose.connection.on('connected', () => {
 })
 
 
-app.get('/', (req, res) => {
-    const articles = [{
-            title: 'Test article',
-            createdAt: new Date(),
-            description: 'Test description'
-        },
-        {
-            title: 'Test article 2',
-            createdAt: new Date(),
-            description: 'Test description 2'
-        },
+app.get('/', async(req, res) => {
 
-    ]
+    const articles = await Article.find().sort({ date: 'desc' })
 
     res.render('articles/index', { articles: articles })
 })
