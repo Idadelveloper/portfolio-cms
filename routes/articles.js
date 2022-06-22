@@ -6,6 +6,11 @@ router.get('/new', (req, res) => {
     res.render('articles/new', { article: new Article() })
 })
 
+router.get('/edit/:id', async(req, res) => {
+    const article = await Article.findById(req.params.id)
+    res.render('articles/edit', { article: article })
+})
+
 router.get('/:slug', async(req, res) => {
     const article = await Article.findOne({ slug: req.params.slug })
     if (article == null) res.redirect('/')
@@ -13,29 +18,40 @@ router.get('/:slug', async(req, res) => {
 })
 
 
-router.post('/', async(req, res) => {
-    let article = new Article({
-        title: req.body.title,
-        category: req.body.category,
-        image: req.body.image,
-        description: req.body.description,
-        markdown: req.body.markdown,
-        date: req.body.date
-    })
+router.post('/', async(req, res, next) => {
+    req.article = new Article()
+    next()
+}, saveArticleAndRedirect('new'))
 
-    try {
-        article = await article.save()
-        res.redirect(`/articles/${article.slug}`)
-    } catch (e) {
-        console.log(e)
-        res.render('articles/new', { article: article })
-    }
-
-})
+router.put('/:id', async(req, res, next) => {
+    req.article = await Article.findById(req.params.id)
+    next()
+}, saveArticleAndRedirect('edit'))
 
 router.delete('/:id', async(req, res) => {
     await Article.findByIdAndDelete(req.params.id)
     res.redirect('/')
 })
+
+function saveArticleAndRedirect(path) {
+    return async(req, res) => {
+        let article = req.article
+
+        article.title = req.body.title
+        article.category = req.body.category
+        article.image = req.body.image
+        article.description = req.body.description
+        article.markdown = req.body.markdown
+        article.date = req.body.date
+
+        try {
+            article = await article.save()
+            res.redirect(`/articles/${article.slug}`)
+        } catch (e) {
+            res.render(`articles/${path}`, { article: article })
+        }
+
+    }
+}
 
 module.exports = router;
