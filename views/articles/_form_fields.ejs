@@ -1,0 +1,53 @@
+<div class="form-group">
+    <label for="title">Title</label>
+    <input required type="text" name="title" id="title" class="form-control">
+</div>
+
+<fieldset class="form-group mt-2">
+    <legend>Select your article category</legend>
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="career" name="category" value="career" checked>
+        <label class="form-check-label" for="career" checked>Career</label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="internship" name="category" value="internship">
+        <label class="form-check-label" for="internship">Internship</label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="opportunity" name="category" value="opportunity">
+        <label class="form-check-label" for="opportunity">Opportunity</label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="tutorial" name="category" value="tutorial">
+        <label class="form-check-label" for="tutorial">Tutorial</label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="other" name="category" value="other">
+        <label class="form-check-label" for="other">Other</label>
+    </div>
+</fieldset>
+
+<div class="form-group mt-4">
+    <label for="description">Description</label>
+    <textarea required name="description" id="description" class="form-control"></textarea>
+</div>
+
+<div class="form-group mt-4">
+    <label for="markdown">Markdown</label>
+    <textarea required name="markdown" id="markdown" class="form-control" cols="30" rows="10"></textarea>
+</div>
+
+<div class="form-group mt-4">
+    <label for="date">Date posted</label>
+    <input required type="date" name="date" id="date" class="form-control">
+</div>
+
+<div class="mt-4 mb-5">
+    <a href="/" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary mt-2">Save</button>
+</div>
