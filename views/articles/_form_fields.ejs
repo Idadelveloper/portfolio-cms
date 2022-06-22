@@ -1,6 +1,11 @@
 <div class="form-group">
     <label for="title">Title</label>
-    <input required type="text" name="title" id="title" class="form-control">
+    <input required type="text" name="title" id="title" class="form-control" value="<%= article.title %> ">
+</div>
+
+<div class="form-group">
+    <label for="image">Image URL</label>
+    <input required type="text" value="<%= article.image %> " name="image" id="image" class="form-control">
 </div>
 
 <fieldset class="form-group mt-2">
@@ -34,17 +39,17 @@
 
 <div class="form-group mt-4">
     <label for="description">Description</label>
-    <textarea required name="description" id="description" class="form-control"></textarea>
+    <textarea required name="description" id="description" class="form-control"><%= article.description %> </textarea>
 </div>
 
 <div class="form-group mt-4">
     <label for="markdown">Markdown</label>
-    <textarea required name="markdown" id="markdown" class="form-control" cols="30" rows="10"></textarea>
+    <textarea required name="markdown" id="markdown" class="form-control" cols="30" rows="10"><%= article.markdown %> </textarea>
 </div>
 
 <div class="form-group mt-4">
     <label for="date">Date posted</label>
-    <input required type="date" name="date" id="date" class="form-control">
+    <input required type="date" value="article.date" name="date" id="date" class="form-control">
 </div>
 
 <div class="mt-4 mb-5">
