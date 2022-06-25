@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container mb-5">
         <h1 class="mb-4">Blog articles</h1>
         <a href="/articles/new" class="btn btn-success">New Article</a>
 
@@ -23,7 +23,10 @@
                     </h4>
                     <div class="card-subtitle text-muted mb-2 d-flex justify-content-between">
                         <p>Created at:
-                            <%= article.date %>
+                            <%= article.createdAt.toDateString() %>
+                        </p>
+                        <p>Updated at:
+                            <%= article.updatedAt.toDateString() %>
                         </p>
                         <p>Category:
                             <%= article.category %>

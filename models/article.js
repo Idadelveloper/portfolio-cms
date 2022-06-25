@@ -29,6 +29,15 @@ const articleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    createdAt: {
+        type: Date,
+        required: true
+    },
+    updatedAt: {
+        type: Date,
+        required: true,
+        default: Date.now
+    },
     slug: {
         type: String,
         required: true,
@@ -49,7 +58,18 @@ articleSchema.pre('validate', function(next) {
         this.sanitizedHtml = dompurify.sanitize(marked.parse(this.markdown))
     }
 
+    if (this.date) {
+        const date = new Date(this.date)
+        this.createdAt = date.toDateString()
+    }
+
     next()
 })
+
+articleSchema.pre('save', function(next) {
+    now = new Date();
+    this.updated_at = now;
+    next();
+});
 
 module.exports = mongoose.model('Article', articleSchema)
